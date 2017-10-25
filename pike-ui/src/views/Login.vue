@@ -20,7 +20,7 @@
 <script>
   // import * as user from 'api/user'
   import { Notification } from 'element-ui'
-  import { LOG_IN, PUT_TOKEN, PUT_SYSRESOURCES } from 'store/user/mutations_types'
+  import { PUT_TOKEN, PUT_SYSRESOURCES } from 'store/user/mutations_types'
   import router from 'router'
   import store from 'store'
   import Cookies from 'js-cookie'
@@ -47,27 +47,13 @@
       login (ev) {
         let { dispatch, commit } = this.$store
         this.loading = true
-        dispatch(LOG_IN, this.loginForm).then(res => {
-          if (res.resultCode === '00') {
-            return dispatch('GenerateRoutes', res.sysResources).then(_ => {
-              Cookies.set('token', res.token)
-              commit(PUT_TOKEN, res.token)
-              commit(PUT_SYSRESOURCES, res.sysResources)
-              this.loading = false
-              router.addRoutes(store.getters.appendRouters)
-              this.$router.push({name: '运营大盘'})
-            }).catch(error => {
-              this.showResult(error, 'd', 'sa')
-              this.loading = false
-            })
-          } else {
-            Notification({
-              title: '登录失败',
-              message: JSON.stringify(res.message),
-              type: 'error'
-            })
-            this.loading = false
-          }
+        return dispatch('GenerateRoutes', []).then(_ => {
+          Cookies.set('token', '2345678678')
+          commit(PUT_TOKEN, '2345678678')
+          commit(PUT_SYSRESOURCES, [])
+          this.loading = false
+          router.addRoutes(store.getters.appendRouters)
+          this.$router.push({name: '运营大盘'})
         }).catch(error => {
           this.showResult(error, 'd', 'sa')
           this.loading = false

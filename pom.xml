@@ -7,6 +7,13 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>pike</name>
+    
+    <parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.6.RELEASE</version>
+	</parent>
+    
     <modules>
 
         <module>pike-web</module>
@@ -91,6 +98,8 @@
         <maven.jar.plugin.configuration.version>3.1</maven.jar.plugin.configuration.version>
 
         <maven.nexus.url>http://192.168.199.21:8081/nexus</maven.nexus.url>
+        
+        <springfox.swagger.version>2.6.1</springfox.swagger.version>
 
         <developer.organization><![CDATA[数人云Java交付团队]]></developer.organization>
     </properties>
@@ -410,6 +419,12 @@
                 <artifactId>saturn-embed</artifactId>
                 <version>${saturn-job.version}</version>
             </dependency>
+            <!-- begin web rest api -->
+	        <dependency>
+	            <groupId>io.springfox</groupId>
+	            <artifactId>springfox-swagger2</artifactId>
+	            <version>${springfox.swagger.version}</version>
+	        </dependency>
         </dependencies>
     </dependencyManagement>
     <build>

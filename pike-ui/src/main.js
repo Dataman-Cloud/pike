@@ -35,17 +35,9 @@ router.beforeEach((to, from, next) => {
   NProgress.start()
   if (Cookies.get('token')) {
     if (to.path === '/login') {
-      next({name: '资源概览'})
+      next({name: '运营大盘'})
     } else {
-      if (!store.getters.permissionRoutes) {
-        store.dispatch('GenerateRoutes', store.getters.sysResources).then(_ => {
-          // 这里最好不要改，很坑
-          router.addRoutes(store.getters.appendRouters)
-          next(Object.assign({}, to))
-        })
-      } else {
-        next()
-      }
+      next()
     }
   } else {
     if (whiteList.indexOf(to.path) > -1) {
