@@ -1,6 +1,7 @@
 # pike  发布管理系统
         pike专注于发布过程的管理，主要实现交付过程自动化的场景。
-        pike基于Jenkins做最终的发布，通过Jenkins rest api实现对Jenkins pipeline的管理，同时也封装了对发布过程涉及到的其他系统如工单系统、CMDB、LDAP的交互。
+        pike基于Jenkins做最终的发布，通过Jenkins rest api实现对Jenkins pipeline的管理，
+                同时也封装了对发布过程涉及到的其他系统如工单系统、CMDB、LDAP的交互。
         pike可以提取封装原生的Linux脚本和groovy脚本，通过可视化表单录入减少人工编写脚本的工作量、降低人工出错概率。
         pike分为以下几个模块
 # pike-api    后台接口模块
