@@ -18,10 +18,43 @@ logging:
   level: INFO
   path: ../logs
 
-
 swagger:
   enabled: true
   title: pike
   description: pike接口规范
   version: 1.0
 
+# mybatis config
+mybatis:
+  configuration:
+    logImpl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapperLocations: 
+    - classpath*:com/dataman/pike/core/dao/sql/**/*.xml
+
+# druid config
+druid:
+  monitor:
+    enabled: true
+  statViewName: DruidStatView
+  urlMappings: "/druid/*"
+  loginUsername: admin
+  loginPassword: 123465
+  mergeSql: true
+  slowSqlMillis: 3000
+  logSlowSql: true
+  useGlobalDataSourceStat: false
+  
+jdbc:
+  name: pike
+  url: jdbc:mysql://192.168.145.31:3306/pike
+  username: root
+  password: 123456
+  type: com.alibaba.druid.pool.DruidDataSource
+  driverClassName: com.mysql.cj.jdbc.Driver
+  initialSize: 5
+  minIdle: 5
+  maxActive: 20
+  maxWait: 60000
+  validationQuery: SELECT 1 
+  minEvictableIdleTimeMillis: 300000  
+  

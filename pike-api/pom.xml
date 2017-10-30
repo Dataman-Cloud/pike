@@ -25,7 +25,10 @@
 			<artifactId>pike-auth</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 		<!-- begin web rest api -->
 		<dependency>
 			<groupId>io.springfox</groupId>

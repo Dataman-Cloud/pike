@@ -11,7 +11,7 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter{
 	
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/").setViewName("redirect:/static/"); // 添加首页
+		// registry.addViewController("/").setViewName("redirect:/static/"); // 添加首页
 		// registry.addViewController("/manager").setViewName("redirect:/static/account.html"); // 添加管理页面
 	}
 	@Override
