@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dataman.pike.core.dao.mapper.ex.DictionaryExMapper">
+  <resultMap id="BaseResultMap" type="com.dataman.pike.core.entity.Dictionary">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name_cn" jdbcType="VARCHAR" property="nameCn" />
+    <result column="name_en" jdbcType="VARCHAR" property="nameEn" />
+    <result column="type" jdbcType="SMALLINT" property="type" />
+    <result column="value" jdbcType="VARCHAR" property="value" />
+    <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+    <result column="update_at" jdbcType="TIMESTAMP" property="updateAt" />
+    <result column="creator" jdbcType="BIGINT" property="creator" />
+  </resultMap>
+  
+  <select id="findPageList" resultMap="projectMap" parameterType="java.lang.String">
+  	select * from t_dictionary 
+  	where 1=1 
+  	<if test="nameCn != null and nameCn != ''">
+  		and name_cn like CONCAT('%', #{nameCn }, '%')
+  	</if>
+  	 order by create_at desc
+  </select>
+ 
+</mapper>
