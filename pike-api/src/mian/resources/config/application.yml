@@ -46,11 +46,11 @@ druid:
   
 jdbc:
   name: pike
-  url: jdbc:mysql://192.168.145.31:3306/pike
+  url: jdbc:mysql://192.168.199.21:3306/pike
   username: root
-  password: 123456
+  password: jRa4DatfNM7g2
   type: com.alibaba.druid.pool.DruidDataSource
-  driverClassName: com.mysql.cj.jdbc.Driver
+  driverClassName: com.mysql.jdbc.Driver
   initialSize: 5
   minIdle: 5
   maxActive: 20
