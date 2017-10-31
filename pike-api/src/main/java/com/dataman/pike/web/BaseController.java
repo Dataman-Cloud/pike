@@ -1,7 +1,6 @@
 package com.dataman.pike.web;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import com.github.miemiedev.mybatis.paginator.domain.Order;
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
-import com.github.miemiedev.mybatis.paginator.domain.Paginator;
 
 @CrossOrigin(origins="*")
 public class BaseController {

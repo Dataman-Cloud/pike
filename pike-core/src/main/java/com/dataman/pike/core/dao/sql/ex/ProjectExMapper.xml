@@ -23,7 +23,20 @@
   </resultMap>
   
   <select id="findPageList" resultMap="projectMap">
-  	select * from t_project order by create_at desc
+  	select * from t_project where 1=1
+  	<if test="proNo != null and proNo != ''">
+  		and exteneral_id like CONCAT('%', #{proNo }, '%')
+  	</if>
+  	<if test="proName != null and proName != ''">
+  		and proname like CONCAT('%', #{proName }, '%')
+  	</if>
+  	<if test="proManager != null and proManager != ''">
+  		and manager like CONCAT('%', #{proManager }, '%')
+  	</if>
+  	<!-- <if test="source != null and source != ''">
+  		and source like CONCAT('%', #{source }, '%')
+  	</if> -->
+  	order by create_at desc
   </select>
   
 </mapper>

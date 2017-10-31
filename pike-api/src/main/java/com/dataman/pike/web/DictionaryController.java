@@ -8,10 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dataman.pike.core.entity.Dictionary;
 import com.dataman.pike.core.param.DictionaryParam;
 import com.dataman.pike.core.service.IDictionaryService;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -47,12 +45,11 @@ public class DictionaryController extends BaseController {
 	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
 	@ApiOperation(value = "修改字典")
 	public Object edit(@ApiParam(required = true, name = "id", value = "字典id") @PathVariable Long id,@RequestBody DictionaryParam param){
-
 		return sucesssRet(dictionaryService.editDictionary(id,param));
 	}
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
-	@ApiOperation(value = "分页查询字典")
+	@ApiOperation(value = "查询")
 	public Object findById(@ApiParam(required = true, name = "id", value = "字典id") @PathVariable Long id){
 		return sucesssRet(dictionaryService.findById(id));
 	}
