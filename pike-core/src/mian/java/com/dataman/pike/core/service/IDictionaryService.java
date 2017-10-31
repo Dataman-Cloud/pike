@@ -1,6 +1,7 @@
 package com.dataman.pike.core.service;
 
 import com.dataman.pike.core.entity.Dictionary;
+import com.dataman.pike.core.param.DictionaryParam;
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 
@@ -12,8 +13,8 @@ public interface IDictionaryService {
 	
 	public PageList<Dictionary> findPageList(String nameCn,PageBounds pb);
 	
-	public int addDictionary(Dictionary o);
+	public int addDictionary(DictionaryParam param);
 	
-	public int editDictionary(Dictionary o);
+	public int editDictionary(Long id,DictionaryParam param);
 	
 }
