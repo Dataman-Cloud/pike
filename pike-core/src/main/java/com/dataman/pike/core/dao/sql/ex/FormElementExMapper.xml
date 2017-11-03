@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dataman.pike.core.dao.mapper.ex.FormElementExMapper">
+  <resultMap id="BaseResultMap" type="com.dataman.pike.core.entity.FormElement">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="oper_id" jdbcType="BIGINT" property="operId" />
+    <result column="name_cn" jdbcType="VARCHAR" property="nameCn" />
+    <result column="name_en" jdbcType="VARCHAR" property="nameEn" />
+    <result column="element_name" jdbcType="VARCHAR" property="elementName" />
+    <result column="rules" jdbcType="VARCHAR" property="rules" />
+    <result column="placeholder" jdbcType="VARCHAR" property="placeholder" />
+    <result column="value_dic" jdbcType="BIGINT" property="valueDic" />
+    <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+    <result column="update_at" jdbcType="TIMESTAMP" property="updateAt" />
+    <result column="creator" jdbcType="BIGINT" property="creator" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, oper_id, name_cn, name_en, element_name, rules, placeholder, value_dic, create_at, 
+    update_at, creator
+  </sql>
+  <select id="selectByOperId" parameterType="java.lang.Long" resultMap="BaseResultMap">    
+    select 
+    <include refid="Base_Column_List" />
+    from t_form_element
+    where oper_id = #{operId,jdbcType=BIGINT}
+  </select>
+  <delete id="delByOperId" parameterType="java.lang.Long">
+    delete from t_form_element
+    where oper_id = #{operId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insertList" parameterType="java.util.List">
+    insert into t_form_element (oper_id, name_cn, name_en, 
+      element_name, rules, placeholder, 
+      value_dic, create_at, update_at, 
+      creator)
+    values 
+    <foreach collection="list" item="item" index="index" separator="," > 
+    (#{item.operId,jdbcType=BIGINT}, #{item.nameCn,jdbcType=VARCHAR}, #{item.nameEn,jdbcType=VARCHAR}, 
+      #{item.elementName,jdbcType=VARCHAR}, #{item.rules,jdbcType=VARCHAR}, #{item.placeholder,jdbcType=VARCHAR}, 
+      #{item.valueDic,jdbcType=BIGINT}, #{item.createAt,jdbcType=TIMESTAMP}, #{item.updateAt,jdbcType=TIMESTAMP}, 
+      #{item.creator,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+  
+</mapper>

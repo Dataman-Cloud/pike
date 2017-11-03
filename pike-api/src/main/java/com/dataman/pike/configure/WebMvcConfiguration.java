@@ -1,9 +1,13 @@
 package com.dataman.pike.configure;
 
+import java.nio.charset.Charset;
 import java.util.List;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -22,14 +26,29 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter{
 		registry.addResourceHandler("/swagger/**").addResourceLocations("classpath:/swagger/");
 	}
 	
+	@Bean
+    public HttpMessageConverter<String> responseBodyConverter() {
+        StringHttpMessageConverter converter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
+        return converter;
+    }
+	
 	@Override
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
-        //converters.add(mappingJackson2HttpMessageConverter());
+        converters.add(responseBodyConverter());
         System.out.println("====================================");
         for (HttpMessageConverter<?> httpMessageConverter : converters) {
+//        	if (httpMessageConverter instanceof StringHttpMessageConverter) {
+//        		StringHttpMessageConverter tmp = (StringHttpMessageConverter) httpMessageConverter;
+//				if(!tmp.getDefaultCharset().equals(Charset.forName("UTF-8"))){
+//					tmp.setDefaultCharset(Charset.forName("UTF-8"));
+//				}
+//			}
 			System.out.println(httpMessageConverter);
 		}
         System.out.println("====================================");
     }
 	
+	
+	
+
 }

@@ -1,27 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dataman.pike.core.dao.mapper.ex.OperationExMapper">
-  <resultMap id="BaseResultMap" type="com.dataman.pike.core.vo.OperationVo">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="name_cn" jdbcType="VARCHAR" property="nameCn" />
-    <result column="name_en" jdbcType="VARCHAR" property="nameEn" />
-    <result column="status_" jdbcType="SMALLINT" property="status" />
-    <result column="type" jdbcType="SMALLINT" property="type" />
-    <result column="form_str" jdbcType="VARCHAR" property="formStr" />
-    <result column="shell_result_str" jdbcType="VARCHAR" property="shellResultStr" />
-    <result column="groovy_result_str" jdbcType="VARCHAR" property="groovyResultStr" />
-    <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
-    <result column="update_at" jdbcType="TIMESTAMP" property="updateAt" />
-    <result column="creator" jdbcType="BIGINT" property="creator" />
-  </resultMap>
-  
-   <select id="findPageList" resultMap="BaseResultMap" parameterType="java.lang.String">
-  	select * from t_operation 
-  	where 1=1 
-  	<if test="nameCn != null and nameCn != ''">
-  		and name_cn like CONCAT('%', #{nameCn }, '%')
-  	</if>
-  	 order by create_at desc
-  </select>
-  
+	<resultMap id="BaseResultMap" type="com.dataman.pike.core.vo.OperationVo">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="name_cn" jdbcType="VARCHAR" property="nameCn" />
+		<result column="name_en" jdbcType="VARCHAR" property="nameEn" />
+		<result column="status_" jdbcType="SMALLINT" property="status" />
+		<result column="type" jdbcType="SMALLINT" property="type" />
+		<result column="form_str" jdbcType="VARCHAR" property="formStr" />
+		<result column="shell_result_str" jdbcType="VARCHAR" property="shellResultStr" />
+		<result column="groovy_result_str" jdbcType="VARCHAR" property="groovyResultStr" />
+		<result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+		<result column="update_at" jdbcType="TIMESTAMP" property="updateAt" />
+		<result column="creator" jdbcType="BIGINT" property="creator" />
+	</resultMap>
+	<resultMap id="withFormELementMap" type="com.dataman.pike.core.vo.OperationVo" 
+		extends="BaseResultMap" >
+		<collection property="formElements" column="oper_id" javaType="ArrayList" ofType="com.dataman.pike.core.entity.FormElement">
+	  		<id column="id" jdbcType="BIGINT" property="id" />
+		    <result column="oper_id" jdbcType="BIGINT" property="operId" />
+		    <result column="name_cn" jdbcType="VARCHAR" property="nameCn" />
+		    <result column="name_en" jdbcType="VARCHAR" property="nameEn" />
+		    <result column="element_name" jdbcType="VARCHAR" property="elementName" />
+		    <result column="rules" jdbcType="VARCHAR" property="rules" />
+		    <result column="placeholder" jdbcType="VARCHAR" property="placeholder" />
+		    <result column="value_dic" jdbcType="BIGINT" property="valueDic" />
+		    <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+		    <result column="update_at" jdbcType="TIMESTAMP" property="updateAt" />
+		    <result column="creator" jdbcType="BIGINT" property="creator" />
+	  	</collection>
+	</resultMap>
+	
+	
+	 <sql id="Base_Column_List">
+	    ${prefix}.id, ${prefix}.name_cn, ${prefix}.name_en, ${prefix}.status_, ${prefix}.type, 
+	    ${prefix}.form_str, ${prefix}.shell_result_str, ${prefix}.groovy_result_str, 
+	    ${prefix}.create_at, ${prefix}.update_at, ${prefix}.creator
+	  </sql>
+
+
+	<sql id="FormElement_Column_List">
+    	${prefix}.id, ${prefix}.oper_id, ${prefix}.name_cn, ${prefix}.name_en, ${prefix}.element_name, 
+    	${prefix}.rules, ${prefix}.placeholder, ${prefix}.value_dic, ${prefix}.create_at, 
+    	${prefix}.update_at, ${prefix}.creator
+  	</sql>
+  	
+	<select id="findPageList" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select 
+		<include refid="Base_Column_List"><property name="prefix" value="o"/></include>
+		from t_operation o
+		where 1=1
+		<if test="nameCn != null and nameCn != ''">
+			and name_cn like CONCAT('%', #{nameCn }, '%')
+		</if>
+		order by create_at desc
+	</select>
+
+	
+	<select id="findById" resultMap="withFormELementMap" parameterType="java.lang.Long">
+		select 
+		<include refid="Base_Column_List"><property name="prefix" value="o"/></include>,
+		<include refid="FormElement_Column_List"><property name="prefix" value="f"/></include>,
+		from t_operation o
+		left join t_form_element f on f.oper_id = o.id
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+
+
 </mapper>

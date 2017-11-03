@@ -12,11 +12,20 @@
 #
 server:
   port: 8081
+  tomcat:
+    uri-encoding: UTF-8
 
 logging:
   config: classpath:config/logback.xml
   level: INFO
   path: ../logs
+
+spring:
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
 
 swagger:
   enabled: true
@@ -24,6 +33,11 @@ swagger:
   description: pike接口规范
   version: 1.0
 
+jenkins:
+  url: http://192.168.199.32:8003
+  user: admin
+  password: 111111
+  
 # mybatis config
 mybatis:
   configuration:
@@ -46,7 +60,7 @@ druid:
   
 jdbc:
   name: pike
-  url: jdbc:mysql://192.168.199.21:3306/pike
+  url: jdbc:mysql://192.168.199.21:3306/pike?useUnicode=true&characterEncoding=UTF-8 
   username: root
   password: jRa4DatfNM7g2
   type: com.alibaba.druid.pool.DruidDataSource

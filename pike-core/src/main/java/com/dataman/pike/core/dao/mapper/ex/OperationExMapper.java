@@ -9,4 +9,7 @@ import com.github.miemiedev.mybatis.paginator.domain.PageList;
 public interface OperationExMapper {
 
 	public PageList<OperationVo> findPageList(@Param("nameCn") String nameCn,PageBounds pb);
+	
+	public OperationVo findById(@Param("id") long id);
 }
+

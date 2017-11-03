@@ -18,7 +18,7 @@ import com.dataman.pike.properties.DruidProperties;
 
 @Configuration
 @EnableConfigurationProperties({ DataSourceProperties.class, DruidProperties.class })
-public class DataSourceConfig {
+public class DataSourceConfiguration {
 	
 	@Autowired
 	private DataSourceProperties dataSourceProperties;
